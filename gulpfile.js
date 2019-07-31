@@ -1,34 +1,91 @@
-var pkg = require('./package.json');
-var gulp = require('gulp');
-
-const BrowserSync = require('./gulp-tasks/browser-sync');
+const pkg = require('./package.json');
+const gulp = require('gulp');
+const BrowserSync = require('./gulp-tasks/browsersync');
 const Sass = require('./gulp-tasks/sass');
 const Scripts = require('./gulp-tasks/scripts');
-const Svg = require('./gulp-tasks/svg-sprite');
 const Img = require('./gulp-tasks/img-min');
 
-gulp.task('browser-sync-init', BrowserSync.initialize);
-gulp.task('js-watch', ['js'], BrowserSync.reload);
-gulp.task('reload-watch', ['copy'], BrowserSync.reload);
+gulp.task('browser-sync-init', function () {
+	BrowserSync.initialize
+});
 
-gulp.task('sass', Sass.build);
+gulp.task('lint', function () {
+	Scripts.lint
+});
 
-gulp.task('lint', Scripts.lint);
-gulp.task('js', ['lint'], Scripts.build);
+gulp.task('js', 
+	gulp.series('lint', gulp.parallel('lint'),
+		function () {
+			Scripts.build
+		}
+	)
+);
+
+gulp.task('js-watch',
+	gulp.series('js', gulp.parallel('js'),
+		function () { 
+			BrowserSync.reload
+		}
+	)
+);
 
 gulp.task('copy', function(){
-    gulp.src(`${pkg.config.themeRoot}/**/*.html`)
+    gulp.src(`${pkg.config.src}/**/*.html`)
         .pipe(gulp.dest(pkg.config.dist));
 });
 
-gulp.task('imagemin', Img.imgmin);
+gulp.task('reload-watch',
+	gulp.series('copy', gulp.parallel('copy'),
+		function () {
+			BrowserSync.reload
+		}
+	)
+);
 
-gulp.task('svg', Svg.build);
-
-gulp.task('watch', function () {
-   gulp.watch(`${pkg.config.scss}/**/*.scss`, ['sass']);
-   gulp.watch(`${pkg.config.scripts}/**/*.js`, ['js-watch']);
-   gulp.watch(`${pkg.config.images}/source/**`, ['imagemin']);
+gulp.task('sass', function () {
+	Sass.build
 });
 
-gulp.task('default', ['sass', 'js', 'imagemin', 'browser-sync-init', 'watch']);
+gulp.task('imagemin', function () {
+	Img.imgmin
+});
+
+gulp.task('watch', function (cb) {
+	gulp.watch([`${pkg.config.scss}/**/*.scss`], function (cb) {
+			['sass']
+			cb();
+		}
+	);
+
+	gulp.watch([`${pkg.config.scripts}/**/*.js`], function (cb) {
+			['js-watch']
+			cb();
+		}
+	);
+
+	gulp.watch([`${pkg.config.images}/**`], function (cb) {
+			['imagemin']
+			cb();
+		}
+	);
+
+	gulp.watch([`${pkg.config.src}/**/*.html`], function (cb) {
+			['reload-watch']
+			cb();
+		}
+	);
+	
+	cb();
+});
+
+gulp.task('default', function(cb) {
+	[
+		'sass',
+		'js',
+		'imagemin',
+		'copy',
+		'browser-sync-init',
+		'watch'
+	]
+	cb();
+});
