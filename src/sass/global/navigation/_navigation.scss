@@ -1,0 +1,102 @@
+/*   6.1. Main Navigation
+    --------------------------------------------------------------------------  */
+
+.main-nav {
+
+    .main-menu-toggle {
+        outline: 0;
+
+        @include respond-to(small) {
+            display: none;
+        }
+    }
+
+}
+
+.main-menu {
+
+    display: none;
+
+    @include respond-to(small) {
+        display: block;
+    }
+
+    .menu-item {
+        position: relative;
+    }
+
+    .menu-item-top-level {
+        @include respond-to(small) {
+            float: left;
+        }
+    }
+
+    .menu-item-link {
+        display: block;
+        height: 44px;
+    }
+
+    .sub-menu-toggle {
+        background: transparent;
+        border: 0;
+        outline: 0;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+
+        @include respond-to(small) {
+            display: none;
+        }
+
+        .icon {
+            transition: all 100ms ease-out;
+
+            @include respond-to(small) {
+                @include square(22px);
+            }
+        }
+
+        &.active .icon {
+            transform: rotate(90deg);
+        }
+    }
+
+    .sub-menu {
+        display: none;
+    }
+
+    &.main-menu-has-touch {
+
+        .sub-menu-toggle {
+            @include respond-to(small) {
+                display: block;
+            }
+        }
+
+        .menu-item-has-children > .menu-item-link {
+            margin-right: 44px;
+
+            @include respond-to(small) {
+                margin-right: 22px;
+            }
+        }
+
+    }
+
+    &.main-menu-no-touch {
+
+        .menu-item-has-children:hover > .sub-menu {
+            display: block;
+        }
+
+    }
+
+}
+
+/*   6.2. Utility Navigation
+    --------------------------------------------------------------------------  */
+
+/*   6.3. Footer Navigation
+    --------------------------------------------------------------------------  */

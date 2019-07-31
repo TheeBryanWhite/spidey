@@ -1,0 +1,63 @@
+{
+  "name": "Galactus",
+  "version": "1.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "config": {
+    "src": "./src",
+    "hostname": "projectname.dev",
+    "scripts": ".src/js",
+    "css": ".src/css",
+    "images": ".src/images",
+    "scss": ".src/scss",
+    "icons": ".src/icons",
+    "dist": "./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-glslify": "^2.0.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.6",
+    "browserify": "^14.3.0",
+    "colors": "^1.1.2",
+    "css-mqpacker": "^5.0.1",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-config-standard-react": "^4.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.9.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "exorcist": "^0.4.0",
+    "glslify": "^6.1.0",
+    "glslify-babel": "^1.0.1",
+    "gulp": "^3.9.1",
+    "gulp-changed": "^3.1.0",
+    "gulp-eslint": "^3.0.1",
+    "gulp-imagemin": "^3.2.0",
+    "gulp-modernizr": "^1.0.0-alpha",
+    "gulp-postcss": "^7.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-svg-sprite": "^1.3.7",
+    "gulp-uglify": "^2.1.2",
+    "gulp-plumber": "^1.1.0",
+    "postcss-pxtorem": "^4.0.0",
+    "postcss-unique-selectors": "^2.0.2",
+    "susy": "^2.2.12",
+    "svg-sprite": "^1.3.7",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "webworkify": "^1.4.0"
+  }
+}
