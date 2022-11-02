@@ -55,7 +55,7 @@
     "postcss-pxtorem": "^4.0.1",
     "postcss-unique-selectors": "^4.0.1",
     "susy": "^3.0.5",
-    "svg-sprite": "^1.5.0",
+    "svg-sprite": "^1.5.4",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
     "webworkify": "^1.5.0"
